@@ -5,8 +5,9 @@
 # domains:clear [appname]
 # domains:remove [appname] DOMAIN
 set -e
+DOKKU_ROOT=${DOKKU_ROOT:-/home/dokku}
 APP_NAME="$2"
-APP_PATH="/home/git/$APP_NAME"
+APP_PATH="$DOKKU_ROOT/$APP_NAME"
 VHOST_PATH="$APP_PATH/VHOST"
 
 if [[ $1 == 'domains' ]] || [[ $1 == 'domains:*' ]]; then
@@ -70,11 +71,11 @@ case "$1" in
   help | domains:help)
     cat <<EOF
     Configure VHOST domains:
-      domains <appname>               # list custom domains for app
-      domains:help <appname>          # this help message
-      domains:add <appname> DOMAIN    # add a custom domain to app
-      domains:clear <appname>         # clear all custom domains for app
-      domains:remove <appname> DOMAIN # remove a custom domain from app
+      domains <appname>                list custom domains for app
+      domains:help <appname>           this help message
+      domains:add <appname> DOMAIN     add a custom domain to app
+      domains:clear <appname>          clear all custom domains for app
+      domains:remove <appname> DOMAIN  remove a custom domain from app
 EOF
   ;;
 esac
